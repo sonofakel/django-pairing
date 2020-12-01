@@ -11,5 +11,6 @@ urlpatterns = [
     path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("", views.PostListView.as_view(), name="blog_index"),
+    path("add/", views.add_post, name="add_post"),
     path("posts/<int:pk>/", views.PostDetailView.as_view(), name="blog_detail"),
 ]

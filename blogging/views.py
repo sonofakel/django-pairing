@@ -1,4 +1,12 @@
 from django.contrib.auth.models import User
+
+from blogging.models import Post
+from blogging.forms import PostForm
+from django import forms
+
+from django.shortcuts import render, redirect
+from django.utils import timezone
+
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from rest_framework import viewsets
@@ -6,6 +14,19 @@ from rest_framework import permissions
 from blogging.serializers import UserSerializer, PostSerializer, CategorySerializer
 
 from blogging.models import Post, Category
+
+
+def add_post(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.published_date = timezone.now()
+            new_post.save()
+            return redirect("/")
+
+    form = PostForm()
+    return render(request, "blogging/add_post.html", {"form": form})
 
 
 class PostListView(ListView):
