@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block content %}
+  <h1>Add a Post</h1>
+  {% comment %} here is where the query happens {% endcomment %}
+  <div class="post">
+    <form method="post" >
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+
+{% endblock %}
