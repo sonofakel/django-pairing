@@ -9,16 +9,16 @@ from django.views.generic.detail import DetailView
 
 
 def add_post(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             new_post = form.save(commit=False)
             new_post.published_date = timezone.now()
             new_post.save()
-            return redirect('/')
+            return redirect("/")
 
     form = PostForm()
-    return render(request, "blogging/add_post.html", {'form': form})
+    return render(request, "blogging/add_post.html", {"form": form})
 
 
 class PostListView(ListView):
